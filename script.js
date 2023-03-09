@@ -1,8 +1,21 @@
 //your code here!
 const list=document.querySelector('#infi-list');
-var index=0;
-for(var i=1;i<=10;i++){
-	var item=list.createElement('li');
-	item.innerText="Item" + i;
+for(let i=1;i<=10;i++){
+	var item=document.createElement('li');
+	item.textContent='item ' + i;
 	list.appendChild(item);
+}
+
+// Add 2 more list items when the user reaches the end of the list
+list.addEventListener("scroll", () => {
+  const lastLi = list.lastElementChild;
+  const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+  const pageOffset = window.pageYOffset + window.innerHeight;
+  if (pageOffset > lastLiOffset - 20) {
+	for (let i = 1; i <= 2; i++) {
+      const li = document.createElement("li");
+      li.textContent = `List item ${list.children.length + i}`;
+      list.appendChild(li);
+    }
+  }
 });
